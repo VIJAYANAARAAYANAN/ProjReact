@@ -31,9 +31,10 @@ export default function Home({ navigation }) {
     navigation.navigate('Cart', { cartItems: [...product, newProduct] });
   };
   
-  
+  let dumarray
   const handlecartpress = () => {
-    navigation.navigate('Cart');
+    console.log(product)
+    navigation.navigate('Cart', { cartItems: product });
   };
 
 

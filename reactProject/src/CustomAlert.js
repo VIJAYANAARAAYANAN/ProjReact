@@ -4,7 +4,7 @@ import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 const CustomAlert = ({ visible, message, onClose, navigation }) => {
   const handleOK = () => {
     onClose();
-    navigation.navigate("Home"); // Navigate to "Home" screen
+    navigation.navigate("Home"); 
   };
 
   return (
