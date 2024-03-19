@@ -17,7 +17,7 @@ const SplashScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
     <Image source={splashimage} style={styles.backgroundImage}/>
-      <Text style={styles.text}>Fashion Tap Ex</Text>
+      <Text style={styles.text}>Fashion Tap</Text>
     </View>
   );
 };
