@@ -26,6 +26,10 @@ export default function Cart({ navigation, route }) {
     setCartItems(updatedCartItems);
   };
 
+  const handlePlaceOrder =() =>{
+    navigation.navigate("Orderconfirm");
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -64,7 +68,7 @@ export default function Cart({ navigation, route }) {
       </ScrollView>
       <View style={styles.totalView}>
         <Text style={styles.totalText}>Total ${cartItems.reduce((acc, item) => acc + item.price, 0)}</Text>
-        <TouchableOpacity style={styles.placeOrderButton}>
+        <TouchableOpacity style={styles.placeOrderButton} onPress={handlePlaceOrder}>
           <Text style={styles.buttonText}>Place Order</Text>
         </TouchableOpacity>
       </View>

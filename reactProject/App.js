@@ -9,7 +9,7 @@ import Login from './Login';
 import Home from './src/Home';
 import Cart from './src/Cart';
 import Login2 from './src/Login2';
-
+import OrderConfirm from './src/Orderconfirm';
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -31,6 +31,7 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Cart" component={Cart} />
+        <Stack.Screen name="Orderconfirm" component={OrderConfirm}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
