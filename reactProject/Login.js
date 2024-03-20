@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   loginButton: {
     bottom: 150,
     backgroundColor: '#007bff',
-    borderRadius: 5,
+    borderRadius: 50,
     padding: 10,
     width: '80%',
     alignItems: 'center',

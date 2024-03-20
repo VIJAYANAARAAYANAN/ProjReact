@@ -24,7 +24,7 @@ const registrationSchema = new mongoose.Schema({
 });
 const Registered = mongoose.model('Registered', registrationSchema);
 
-// Define API endpoint for user registration
+//registration
 app.post('/register', async (req, res) => {
   try {
     const { firstname, lastname, email, password } = req.body;

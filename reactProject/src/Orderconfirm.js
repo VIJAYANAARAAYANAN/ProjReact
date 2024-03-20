@@ -1,12 +1,15 @@
 import React, { useRef, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
-import CustomAlert from './CustomAlert'; // Import the CustomAlert component
+import CustomAlert from './CustomAlert';
 
 export default function OrderConfirmation({ navigation }) {
   const nameRef = useRef(null);
   const addressRef = useRef(null);
   const phoneRef = useRef(null);
   const [showAlert, setShowAlert] = useState(false);
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
 
   const handleConfirmOrder = () => {
     setShowAlert(true);
@@ -15,6 +18,10 @@ export default function OrderConfirmation({ navigation }) {
   const handleAlertClose = () => {
     setShowAlert(false);
     navigation.navigate('Home');
+  };
+
+  const isFormValid = () => {
+    return name.trim() !== '' && address.trim() !== '' && phone.trim() !== '';
   };
 
   return (
@@ -27,6 +34,7 @@ export default function OrderConfirmation({ navigation }) {
           ref={nameRef}
           returnKeyType="next"
           onSubmitEditing={() => addressRef.current.focus()}
+          onChangeText={(text) => setName(text)}
         />
         <TextInput
           style={styles.input}
@@ -34,6 +42,7 @@ export default function OrderConfirmation({ navigation }) {
           ref={addressRef}
           returnKeyType="next"
           onSubmitEditing={() => phoneRef.current.focus()}
+          onChangeText={(text) => setAddress(text)}
         />
         <TextInput
           style={styles.input}
@@ -42,9 +51,13 @@ export default function OrderConfirmation({ navigation }) {
           keyboardType="phone-pad"
           returnKeyType="done"
           onSubmitEditing={handleConfirmOrder}
+          onChangeText={(text) => setPhone(text)}
         />
       </View>
-      <TouchableOpacity style={styles.confirmButton} onPress={handleConfirmOrder}>
+      <TouchableOpacity
+        style={[styles.confirmButton, !isFormValid() && { backgroundColor: '#ccc' }]}
+        onPress={handleConfirmOrder}
+        disabled={!isFormValid()} >
         <Text style={styles.buttonText}>Confirm Order</Text>
       </TouchableOpacity>
       <CustomAlert
@@ -58,36 +71,36 @@ export default function OrderConfirmation({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: 'white',
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingHorizontal: 20,
-    },
-    title: {
-      fontSize: 24,
-      fontWeight: 'bold',
-      marginBottom: 30,
-    },
-    inputContainer: {
-      width: '100%',
-      marginBottom: 30,
-    },
-    input: {
-      backgroundColor: '#f2f2f2',
-      padding: 15,
-      borderRadius: 10,
-      marginBottom: 30,
-    },
-    confirmButton: {
-      backgroundColor: '#1170FF',
-      paddingHorizontal: 20,
-      paddingVertical: 15,
-      borderRadius: 10,
-    },
-    buttonText: {
-      color: 'white',
-      fontWeight: 'bold',
-    },
-  });
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 30,
+  },
+  inputContainer: {
+    width: '100%',
+    marginBottom: 30,
+  },
+  input: {
+    backgroundColor: '#f2f2f2',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 30,
+  },
+  confirmButton: {
+    backgroundColor: '#1170FF',
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+});

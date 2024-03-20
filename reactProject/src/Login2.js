@@ -44,7 +44,7 @@ export default function Login({ navigation }) {
   };
 
   const handleSignup = () => {
-    navigation.navigate('Signup');
+    navigation.navigate('Login');
   };
 
   return (
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     backgroundColor: '#007bff',
-    borderRadius: 5,
+    borderRadius: 50,
     padding: 10,
     width: '80%',
     alignItems: 'center',
