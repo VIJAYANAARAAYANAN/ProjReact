@@ -39,6 +39,25 @@ app.post('/register', async (req, res) => {
   }
 });
 
+// login
+app.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    console.log('Received login request:', req.body);
+    const user = await Registered.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    if (user.password !== password) {
+      return res.status(401).json({ message: 'Incorrect password' });
+    }
+    res.status(200).json({ message: 'Login successful' });
+  } catch (error) {
+    console.error('Error logging in:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

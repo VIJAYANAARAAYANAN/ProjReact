@@ -49,7 +49,7 @@ export default function OrderConfirmation({ navigation }) {
       </TouchableOpacity>
       <CustomAlert
         visible={showAlert}
-        message="Successful! Your order has been placed."
+        message="Successful!,Order has been placed."
         onClose={handleAlertClose}
         navigation={navigation}
       />

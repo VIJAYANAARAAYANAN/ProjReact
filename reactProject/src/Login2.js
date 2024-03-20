@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'reac
 import * as Yup from 'yup';
 import CustomAlert from './CustomAlert';
 
-export default function App({ navigation }) {
+export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showAlert, setShowAlert] = useState(false);
@@ -17,14 +17,24 @@ export default function App({ navigation }) {
   const handleLogin = async () => {
     try {
       await validationSchema.validate({ email, password }, { abortEarly: false });
-      console.log("Email:", email);
-      console.log("Password:", password);
-      setShowAlert(true);
-      // navigation.navigate('Home'); // Moved navigation to onClose of CustomAlert
+
+      const response = await fetch('http://192.168.10.84:3000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        setShowAlert(true);
+      } else {
+        const responseData = await response.json();
+        Alert.alert('Login Failed', responseData.message);
+      }
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errorMessage = error.errors.join('\n');
-        console.log(errorMessage);
         Alert.alert('Validation Error', errorMessage);
       } else {
         console.error('Error logging in:', error);
@@ -34,7 +44,7 @@ export default function App({ navigation }) {
   };
 
   const handleSignup = () => {
-    navigation.navigate('Login');
+    navigation.navigate('Signup');
   };
 
   return (
@@ -103,7 +113,6 @@ const styles = StyleSheet.create({
     gap: 0,
     marginBottom: 30,
   },
-
   textLabel: {
     fontSize: 20,
     marginBottom: 5,
